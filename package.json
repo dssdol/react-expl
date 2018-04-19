@@ -1,0 +1,19 @@
+{
+  "name": "react-ex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && json-server db.json -w -p 3000",
+    "dev": "roadhog server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-prop-types": "^0.4.0",
+    "react-router": "^3.0.5"
+  }
+}
