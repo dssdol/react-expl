@@ -12,11 +12,6 @@ import PropTypes from 'prop-types';
      }
 
      componentWillMount(){
-         // const {editTarget,setFormValues}=this.props;
-         // if (editTarget) {
-         //     setFormValues(editTarget);
-         // }
-
          fetch('http://localhost:3000/user')
              .then(res=>res.json())
              .then(res=>{

@@ -13,7 +13,7 @@ class UserEditor extends React.Component{
     }
     handleSubmit(e){
         e.preventDefault();
-        const{form:{name,age,gender},formValid,editTarget}=this.props;
+        const {form:{name,age,gender},formValid,editTarget}=this.props;
 
         if(!formValid){
             alert('请填写正确的信息后重试');
