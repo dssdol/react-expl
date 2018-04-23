@@ -9,7 +9,6 @@ class UserAdd extends React.Component{
 
 
     render(){
-        const {form: {name,age,gender},onFormChange}=this.props;
         return (
             <HomeLayout title='添加用户'>
                <UserEditor/>

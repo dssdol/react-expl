@@ -6,11 +6,6 @@ import HomeLayout from '../layouts/HomeLayout';
 
 class UserEditor extends React.Component{
     componentWillMount(){
-        // const {editTarget,setFormValues}=this.props;
-        //
-        // if(editTarget){
-        //     setFormValues(editTarget);
-        // }
         const {editTarget, setFormValues} = this.props;
         if (editTarget) {
             setFormValues(editTarget);
@@ -18,7 +13,7 @@ class UserEditor extends React.Component{
     }
     handleSubmit(e){
         e.preventDefault();
-        const{form:{name,age,gender},formValid}=this.props;
+        const{form:{name,age,gender},formValid,editTarget}=this.props;
 
         if(!formValid){
             alert('请填写正确的信息后重试');
@@ -28,8 +23,7 @@ class UserEditor extends React.Component{
         let editType="添加";
         let apiUrl="http://localhost:3000/user";
         let method="post";
-
-        if(editTarget){
+        if(!!editTarget){
             editType = "编辑";
             apiUrl += '/'+ editTarget.id;
             method = 'put';
@@ -65,7 +59,7 @@ class UserEditor extends React.Component{
     render(){
         const {form: {name,age,gender},onFormChange}=this.props;
         return (
-            <HomeLayout title='添加用户'>
+            <HomeLayout>
                 <form onSubmit={(e)=>this.handleSubmit(e)}>
                     <FormItem label='用户名: ' valid={name.valid} error={name.error}>
                         <input
@@ -97,7 +91,7 @@ class UserEditor extends React.Component{
 // 必须给UserAdd定义一个包含router属性的contextTypes
 // 使得组件中可以通过this.context.router来使用React Router提供的方法
 UserEditor.contextTypes={
-    router:React.Proptypes.object.isRequired
+    router:PropTypes.object.isRequired
 };
 
 UserEditor=formProvider({

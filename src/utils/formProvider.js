@@ -20,10 +20,10 @@ import React from 'react';
                       formValid:false
                   }
                   this.handleValueChange=this.handleValueChange.bind(this);
-                  this.setFormValue=this.setFormValue.bind(this);
+                  this.setFormValues=this.setFormValues.bind(this);
 
               };
-                setFormValue(values){
+                setFormValues(values){
                     if(!values){
                         return;
                     }
@@ -31,7 +31,7 @@ import React from 'react';
                     const {form}=this.state;
                     let newForm={...form};
                     for(const field in form){
-                        if(form.hasownproperty(field)){
+                        if(form.hasOwnProperty(field)){
                             if(typeof values[field] !=='undefined'){
                                 newForm[field] = {...newForm[field],value: values[field]}
                             }

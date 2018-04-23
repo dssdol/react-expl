@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
+import PropTypes from 'prop-types';
 
  class UserList extends React.Component{
 
@@ -40,7 +41,7 @@ import HomeLayout from '../layouts/HomeLayout';
                      this.setState({
                          userList: this.state.userList.filter(item => item.id !== user.id)
                      });
-                     alert('添加成功');
+                     alert('删除成功');
                  })
                  .catch(err=>{
                      console.error(err);
@@ -72,7 +73,7 @@ import HomeLayout from '../layouts/HomeLayout';
                                      <td>{user.age}</td>
                                      <td>{user.gender}</td>
                                      <td>
-                                         <a href="javascripit:;" onClick={() => this.handleDel(user)}>删除</a>
+                                         <a href="javascripit:;" onClick={() => this.handleDel(user)}>删除</a>&nbsp;
                                          <a href="javascripit:;" onClick={() => this.handleEdit(user)}>编辑</a>
                                      </td>
                                  </tr>
@@ -88,6 +89,6 @@ import HomeLayout from '../layouts/HomeLayout';
 
  }
 UserList.contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired
 };
  export default UserList;
