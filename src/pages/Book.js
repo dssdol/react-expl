@@ -8,7 +8,7 @@ class Book extends React.Component{
             <HomeLayout title="图书管理">
                 <Link to="/book/bookList">图书列表</Link>
                 <br />
-                <Link to="/book/addBook">添加图书</Link>
+                <Link to="/book/bookAdd">添加图书</Link>
                 <br />
             </HomeLayout>
         )

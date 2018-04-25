@@ -9,6 +9,7 @@ import UserEditPage from './pages/UserEdit';
 
 import BookPage from './pages/Book';
 import BookListPage from './pages/BookList';
+import BookAddPage from './pages/BookAdd';
 
 
 ReactDOM.render((
@@ -21,7 +22,6 @@ ReactDOM.render((
 
         <Route path="/book/index" component={BookPage}/>
         <Route path="/book/bookList" component={BookListPage}/>
-
-
+        <Route path="/book/bookAdd" component={BookAddPage} />
     </Router>
 ), document.getElementById('app'));
