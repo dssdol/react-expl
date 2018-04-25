@@ -4,10 +4,50 @@ import HomeLayout from '../layouts/HomeLayout'
 
 
 class BookEditor extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            name:'',
+            price:'',
+            ownerId:''
+        }
+    }
+    componentWillMount(){
+        const {editTarget} = this.props;
+        if (editTarget) {
+            this.setFormValues(editTarget);
+        }
+    }
+
+
+    setFormValues(values){
+        if(!values){
+            return;
+        }
+
+        const {form}=this.state;
+        let newForm={...form};
+        for(const field in form){
+            if(form.hasOwnProperty(field)){
+                if(typeof values[field] !=='undefined'){
+                    newForm[field] = {...newForm[field],value: values[field]}
+                }
+            }
+
+            this.setState({form: newForm});
+        }
+    }
+
+    handleValueChange(field,value){
+        this.setState({
+        [field]:value
+        })
+    }
+
 
     handleSubmit(e) {
         e.preventDefault();
-        const {form: {name, price, ownerId}, editTarget} = this.props;
+        const {form:{name, price, ownerId},editTarget}= this.props;
 
         let editType = "添加";
         let apiUrl = "http://localhost:3000/book";
@@ -17,13 +57,17 @@ class BookEditor extends React.Component{
             method = "put";
             apiUrl += '/' + editTarget.id;
         }
-
+console.log( JSON.stringify({
+    name: name,
+    price: price,
+    ownerId: ownerId
+}));
         fetch(apiUrl, {
             method: method,
             body: JSON.stringify({
-                name: name.value,
-                price: price.value,
-                ownerId: ownerId.value
+                name: name,
+                price: price,
+                ownerId: ownerId
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -49,19 +93,20 @@ class BookEditor extends React.Component{
                     <div>
                         <label>图书名称</label>
                         <input type="text"
-                               value={name.value}
+                               value={name || ''} onChange={(e)=> this.handleValueChange('name',e.target.value)}
                         />
                         <br />
                         <label>图书价格</label>
                         <input type="number"
-                               value={price.value}
+                               value={price || ''} onChange={(e)=> this.handleValueChange('price',e.target.value)}
                         />
                         <br />
                         <label>图书所有者</label>
                         <input type="text"
-                               value={ownerId.value}
+                               value={ownerId || ''} onChange={(e)=> this.handleValueChange('ownerId',e.target.value)}
                         />
                         <br />
+
                     </div>
                     <input type="submit" value="提交"/>
                 </form>
@@ -76,18 +121,18 @@ BookEditor.contextTypes={
     router:PropTypes.object.isRequired
 }
 
-BookEditor={
-    name:{
-        value:''
-    },
-    price:{
-        value:0
-    },
-    ownerId:{
-        value:''
-    }
-
-}
+// BookEditor={
+//     name:{
+//         value:''
+//     },
+//     price:{
+//         value:0
+//     },
+//     ownerId:{
+//         value:''
+//     }
+//
+// }
 
 
 
