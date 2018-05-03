@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
+import PropTypes from 'prop-types';
 
 class BookList extends React.Component{
     constructor(props){
@@ -18,9 +19,13 @@ class BookList extends React.Component{
                 });
             });
     }
-
+    handleEdit(book){
+        this.context.router.push('/book/edit/' + book.id);
+    }
     render(){
         const {bookList}=this.state;
+        console.log(bookList);
+        console.log(typeof bookList);
         return(
             <HomeLayout title="图书列表">
                 <table>
@@ -32,25 +37,16 @@ class BookList extends React.Component{
                         <th>图书所有者</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {
-                        bookList.map((book)=>{
-                            return(
-                                <tr key={book.id}>
-                                    <td>{book.id}</td>
-                                    <td>{book.name}</td>
-                                    <td>{book.price}</td>
-                                    <td>{book.owner_id}</td>
-                                </tr>
-                            )
-                        })
-                    }
-                    </tbody>
+
                 </table>
             </HomeLayout>
         );
     }
 
 }
+
+BookList.contextTypes = {
+    router: PropTypes.object.isRequired
+};
 
 export default BookList;

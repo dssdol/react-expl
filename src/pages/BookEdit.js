@@ -19,12 +19,15 @@ class BookEdit extends React.Component{
                 this.setState({
                     book:res
                 })
+
             })
 
     }
 
     render(){
         const {book}=this.state;
+        console.log(book);
+        // console.log(this.state);
         return (
             <HomeLayout title="编辑图书">
                 {

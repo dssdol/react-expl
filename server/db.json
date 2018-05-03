@@ -42,10 +42,21 @@
   ],
   "book": [
     {
-      "id": 10000,
-      "name": "JavaScript从入门到精通",
-      "price": 9990,
-      "owner_id": 10000
+      "name": {
+        "value": "JavaScript从入门到精通",
+        "error": "",
+        "valid": true
+      },
+      "price": {
+        "value": 9990,
+        "error": "",
+        "valid": true
+      },
+      "ownerId": {
+        "error": "",
+        "valid": true
+      },
+      "id": 10000
     },
     {
       "id": 10001,
@@ -88,6 +99,18 @@
       "price": "1000",
       "ownerId": "10000",
       "id": 10008
+    },
+    {
+      "name": "平凡的世界",
+      "price": "600",
+      "ownerId": "100",
+      "id": 10009
+    },
+    {
+      "name": "123",
+      "price": "1231",
+      "ownerId": "1231",
+      "id": 10010
     }
   ]
 }

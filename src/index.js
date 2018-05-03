@@ -24,6 +24,6 @@ ReactDOM.render((
         <Route path="/book/index" component={BookPage}/>
         <Route path="/book/bookList" component={BookListPage}/>
         <Route path="/book/bookAdd" component={BookAddPage} />
-        <Route path="/user/edit/:id" component={BookEditPage} />
+        <Route path="/book/edit/:id" component={BookEditPage} />
     </Router>
 ), document.getElementById('app'));
