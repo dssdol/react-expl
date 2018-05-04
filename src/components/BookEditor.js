@@ -17,8 +17,7 @@ class BookEditor extends React.Component{
 
     handleSubmit(e) {
         e.preventDefault();
-        const {form:{name, price, ownerId},formValid,editTarget}= this.props;
-
+        const {form:{name, price, ownerid},editTarget}= this.props;
         let editType = "添加";
         let apiUrl = "http://localhost:3000/book";
         let method = "post";
@@ -30,9 +29,9 @@ class BookEditor extends React.Component{
         fetch(apiUrl, {
             method: method,
             body: JSON.stringify({
-                name: name.value,
-                price: price.value,
-                ownerId: ownerId.value
+                name: name,
+                price: price,
+                ownerid: ownerid
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -41,7 +40,7 @@ class BookEditor extends React.Component{
             .then((res) => res.json())
             .then((res) => {
                 if (res.id) {
-                    alert(editType + '用户成功');
+                    alert(editType + '图书成功');
                     this.context.router.push('/book/bookList');
                     return;
                 } else {
@@ -51,24 +50,24 @@ class BookEditor extends React.Component{
             .catch((err) => console.error(err));
     }
     render(){
-        const {form:{name,price,ownerId},onFormChange}=this.props;
+        const {form:{name,price,ownerid},onFormChange}=this.props;
         return(
             <HomeLayout>
                 <form onSubmit={(e)=>this.handleSubmit(e)}>
                     <div>
-                        <label valid={name.valid} error={name.error}>图书名称</label>
+                        <label >图书名称</label>
                         <input type="text"
-                               value={name.value}  onChange={(e)=> onFormChange('name',e.target.value)}
+                               value={name || ''}  onChange={(e)=> onFormChange('name',e.target.value)}
                         />
                         <br />
-                        <label valid={price.valid} error={price.error}>图书价格</label>
+                        <label >图书价格</label>
                         <input type="number"
-                               value={price.value} onChange={(e)=> onFormChange('price',e.target.value)}
+                               value={price || ''} onChange={(e)=> onFormChange('price',e.target.value)}
                         />
                         <br />
-                        <label valid={ownerId.valid} error={ownerId.error}>图书所有者</label>
+                        <label >图书所有者</label>
                         <input type="text"
-                               value={ownerId.value} onChange={(e)=> onFormChange('ownerId',e.target.value)}
+                               value={ownerid || ''} onChange={(e)=> onFormChange('ownerid',e.target.value)}
                         />
                         <br />
 
@@ -87,52 +86,10 @@ BookEditor.contextTypes={
 }
 
 BookEditor=formProvider({
-    // name:{
-    //     value:''
-    // },
-    // price:{
-    //     value:0
-    // },
-    // ownerId:{
-    //     value:''
-    // }
-    name:{
-        defaultValue:'',
-        rules:[
-            {
-                pattern:function(value){
-                    return value.length>0;
-                },
-                error:'请输入用户名'
-            },
-            {
-                pattern:/^.{1,4}$/,
-                error:'用户名最多4个字符'
-            }
-        ]
-    },
-    price:{
-        defaultValue:0,
-        rules:[
-            {
-                pattern:function(value){
-                    return value>=1 && value<=10000;
-                },
-                error:'请输入10000以下数据'
-            }
-        ]
-    },
-    ownerId:{
-        defaultValue:'',
-        rules:[
-            {
-                pattern:function(value){
-                    return !!value;
-                },
-                error:"请选择作者名"
-            }
-        ]
-    }
+    name:'',
+    price:0,
+    ownerid:''
+
 })(BookEditor)
 
 

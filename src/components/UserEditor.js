@@ -1,6 +1,6 @@
 import React from 'react';
 import FormItem from '../components/FormItem';
-import formProvider from '../utils/formProvider';
+import formProvider from '../utils/formProvider1';
 import PropTypes from 'prop-types';
 import HomeLayout from '../layouts/HomeLayout';
 

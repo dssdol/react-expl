@@ -26,36 +26,13 @@
       "age": "25",
       "gender": "female",
       "id": 10010
-    },
-    {
-      "name": "臭孩子",
-      "age": "12",
-      "gender": "male",
-      "id": 10012
-    },
-    {
-      "name": "添加1",
-      "age": "12",
-      "gender": "female",
-      "id": 10013
     }
   ],
   "book": [
     {
-      "name": {
-        "value": "JavaScript从入门到精通",
-        "error": "",
-        "valid": true
-      },
-      "price": {
-        "value": 9990,
-        "error": "",
-        "valid": true
-      },
-      "ownerId": {
-        "error": "",
-        "valid": true
-      },
+      "name": "JavaScript从入门到精通1",
+      "price": 9990,
+      "ownerid": 10001,
       "id": 10000
     },
     {
@@ -89,9 +66,9 @@
       "id": 10006
     },
     {
-      "name": "一个人的朝圣",
+      "name": "一个人的朝圣2",
       "price": "100",
-      "ownerId": "10005",
+      "ownerid": "1",
       "id": 10007
     },
     {
@@ -111,6 +88,12 @@
       "price": "1231",
       "ownerId": "1231",
       "id": 10010
+    },
+    {
+      "name": "测试添加",
+      "price": "11",
+      "ownerid": "100",
+      "id": 10013
     }
   ]
 }

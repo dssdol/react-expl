@@ -19,13 +19,31 @@ class BookList extends React.Component{
                 });
             });
     }
+    handleDele(book){
+        const confirm=window.confirm(`确定删除 ${book.name} 吗?`)
+        if(confirm){
+            fetch('http://localhost:3000/book/'+book.id,{
+                method:'delete'
+            })
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res+"aas");
+                    this.setState({
+                        bookList:this.state.bookList.filter(item=> item.id !== book.id)
+                    });
+                    alert('删除成功');
+                })
+                .catch(err=>{
+                    console.log(err+'删除失败');
+                    alert('删除用户失败');
+            })
+        }
+    }
     handleEdit(book){
         this.context.router.push('/book/edit/' + book.id);
     }
     render(){
         const {bookList}=this.state;
-        console.log(bookList);
-        console.log(typeof bookList);
         return(
             <HomeLayout title="图书列表">
                 <table>
@@ -37,7 +55,26 @@ class BookList extends React.Component{
                         <th>图书所有者</th>
                     </tr>
                     </thead>
-
+                    <tbody>
+                    {
+                        bookList.map((book)=>{
+                            return(
+                                <tr key={book.id}>
+                                    <td>{book.id}</td>
+                                    <td>{book.name}</td>
+                                    <td>{book.price}</td>
+                                    <td>{book.owner_id}</td>
+                                    <td>
+                                        <a href="javascripit:;" onClick={() => this.handleEdit(book)}>编辑</a>
+                                    </td>
+                                    <td>
+                                        <a href="javascripit:;" onClick={() => this.handleDele(book)}>删除</a>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+                    </tbody>
                 </table>
             </HomeLayout>
         );
