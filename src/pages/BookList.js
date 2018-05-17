@@ -63,7 +63,7 @@ class BookList extends React.Component{
                                     <td>{book.id}</td>
                                     <td>{book.name}</td>
                                     <td>{book.price}</td>
-                                    <td>{book.owner_id}</td>
+                                    <td>{book.ownerid}</td>
                                     <td>
                                         <a href="javascripit:;" onClick={() => this.handleEdit(book)}>编辑</a>
                                     </td>

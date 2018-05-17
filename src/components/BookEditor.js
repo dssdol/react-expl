@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import formProvider from '../utils/formProvider';
+import AutoComplete from './AutoComplete';
 
 import HomeLayout from '../layouts/HomeLayout'
+import FormItem from "./FormItem";
 
 
 class BookEditor extends React.Component{
@@ -31,7 +33,7 @@ class BookEditor extends React.Component{
             body: JSON.stringify({
                 name: name,
                 price: price,
-                ownerid: ownerid
+                ownerid: ownerid,
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -50,26 +52,29 @@ class BookEditor extends React.Component{
             .catch((err) => console.error(err));
     }
     render(){
+
         const {form:{name,price,ownerid},onFormChange}=this.props;
         return(
             <HomeLayout>
                 <form onSubmit={(e)=>this.handleSubmit(e)}>
                     <div>
-                        <label >图书名称</label>
+                        <label >图书名称：</label>
                         <input type="text"
                                value={name || ''}  onChange={(e)=> onFormChange('name',e.target.value)}
                         />
                         <br />
-                        <label >图书价格</label>
+                        <label >图书价格：</label>
                         <input type="number"
                                value={price || ''} onChange={(e)=> onFormChange('price',e.target.value)}
                         />
                         <br />
-                        <label >图书所有者</label>
-                        <input type="text"
-                               value={ownerid || ''} onChange={(e)=> onFormChange('ownerid',e.target.value)}
-                        />
+
+                        <label >图书所有者：</label>
+                       <AutoComplete value={ownerid ? ownerid+'' : ''}
+                                     options={[{text:'10001(张三)',value:10001},{text:'10009(编辑)',value:10009},{text:'10010(南乔)',value:10010}]}
+                                     onValueChanges={value=> onFormChange('ownerid',value)}/>
                         <br />
+
 
                     </div>
                     <input type="submit" value="提交"/>
@@ -88,7 +93,8 @@ BookEditor.contextTypes={
 BookEditor=formProvider({
     name:'',
     price:0,
-    ownerid:''
+    ownerid:'',
+    ownername:''
 
 })(BookEditor)
 

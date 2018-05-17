@@ -32,32 +32,32 @@
     {
       "name": "JavaScript从入门到精通1",
       "price": 9990,
-      "ownerid": 10001,
+      "ownerid": "10009（编辑）",
       "id": 10000
     },
     {
-      "id": 10001,
       "name": "Java从入门到放弃",
       "price": 1990,
-      "owner_id": 10001
+      "ownerid": 10001,
+      "id": 10001
     },
     {
-      "id": 10002,
       "name": "react 菜鸟初长成",
       "price": 1990,
-      "owner_id": 10002
+      "ownerid": "10001(张三)",
+      "id": 10002
     },
     {
       "id": 10003,
       "name": "react 入门",
       "price": 1990,
-      "owner_id": 10002
+      "ownerid": 10002
     },
     {
       "id": 10004,
       "name": "react 精髓",
       "price": 1990,
-      "owner_id": 10002
+      "ownerid": 10002
     },
     {
       "id": 10005
@@ -94,6 +94,12 @@
       "price": "11",
       "ownerid": "100",
       "id": 10013
+    },
+    {
+      "name": "非暴力沟通",
+      "price": "300",
+      "ownerid": 10009,
+      "id": 10014
     }
   ]
 }
