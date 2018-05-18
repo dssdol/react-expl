@@ -8,6 +8,12 @@ import FormItem from "./FormItem";
 
 
 class BookEditor extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            recommendUsers:[]
+        }
+    }
 
     componentWillMount(){
         const {editTarget,setFormValues} = this.props;
@@ -51,8 +57,47 @@ class BookEditor extends React.Component{
             })
             .catch((err) => console.error(err));
     }
-    render(){
 
+    //获取建议列表
+    getRecommendUsers(partialUserId){
+        fetch('http://localhost:3000/user?id_like=' + partialUserId)
+            .then((res)=>res.json())
+            .then((res)=>{
+                if(res.length==1 && res[0].id===partialUserId){
+                    // 如果结果只有1条且id与输入的id一致，说明输入的id已经完整了，没必要再设置建议列表
+                    return;
+                };
+                this.setState({
+                    recommendUsers:res.map((user)=>{
+                        return {
+                            text:`${user.id}（${user.name}）`,
+                            value:user.id
+                        };
+                    })
+                });
+            });
+    }
+
+    timer=0;
+    handleOwnerIdChange(value){
+        this.props.onFormChange('ownerid',value);
+        this.setState({
+            recommendUsers:[]
+        });
+
+        if(this.timer){
+            clearTimeout(this.timer);
+        }
+        if(value){
+            this.timer=setTimeout(()=>{
+                this.setState(this.getRecommendUsers(value));
+                this.timer=0;
+            },200)
+        }
+
+    }
+    render(){
+        const {recommendUsers}=this.state;
         const {form:{name,price,ownerid},onFormChange}=this.props;
         return(
             <HomeLayout>
@@ -71,8 +116,8 @@ class BookEditor extends React.Component{
 
                         <label >图书所有者：</label>
                        <AutoComplete value={ownerid ? ownerid+'' : ''}
-                                     options={[{text:'10001(张三)',value:10001},{text:'10009(编辑)',value:10009},{text:'10010(南乔)',value:10010}]}
-                                     onValueChanges={value=> onFormChange('ownerid',value)}/>
+                                     options={recommendUsers}
+                                     onValueChanges={value=> this.handleOwnerIdChange(value)}/>
                         <br />
 
 
