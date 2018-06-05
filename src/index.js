@@ -12,6 +12,8 @@ import BookListPage from './pages/BookList';
 import BookAddPage from './pages/BookAdd';
 import BookEditPage from "./pages/BookEdit";
 
+import Login from "./pages/Login";
+
 
 ReactDOM.render((
     <Router history={hashHistory}>
@@ -25,5 +27,7 @@ ReactDOM.render((
         <Route path="/book/bookList" component={BookListPage}/>
         <Route path="/book/bookAdd" component={BookAddPage} />
         <Route path="/book/edit/:id" component={BookEditPage} />
+
+        <Route path="/login" component={Login} />
     </Router>
 ), document.getElementById('app'));

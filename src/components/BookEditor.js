@@ -5,7 +5,7 @@ import AutoComplete from './AutoComplete';
 
 import HomeLayout from '../layouts/HomeLayout'
 import FormItem from "./FormItem";
-
+import request,{get}from '../utils/request';
 
 class BookEditor extends React.Component{
     constructor(props){
@@ -34,17 +34,24 @@ class BookEditor extends React.Component{
             method = "put";
             apiUrl += '/' + editTarget.id;
         }
-        fetch(apiUrl, {
-            method: method,
-            body: JSON.stringify({
-                name: name,
-                price: price,
-                ownerid: ownerid,
-            }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
+        // fetch(apiUrl, {
+        //     method: method,
+        //     body: JSON.stringify({
+        //         name: name,
+        //         price: price,
+        //         ownerid: ownerid,
+        //     }),
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // })
+            request(method,apiUrl,{
+                body: JSON.stringify({
+                    name: name,
+                    price: price,
+                    ownerid: ownerid,
+                }),
+            })
             .then((res) => res.json())
             .then((res) => {
                 if (res.id) {
@@ -60,7 +67,7 @@ class BookEditor extends React.Component{
 
     //获取建议列表
     getRecommendUsers(partialUserId){
-        fetch('http://localhost:3000/user?id_like=' + partialUserId)
+        get('http://localhost:3000/user?id_like=' + partialUserId)
             .then((res)=>res.json())
             .then((res)=>{
                 if(res.length==1 && res[0].id===partialUserId){

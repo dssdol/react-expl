@@ -3,6 +3,8 @@ import FormItem from '../components/FormItem';
 import formProvider from '../utils/formProvider1';
 import PropTypes from 'prop-types';
 import HomeLayout from '../layouts/HomeLayout';
+import request,{post} from '../utils/request';
+
 
 class UserEditor extends React.Component{
     componentWillMount(){
@@ -30,21 +32,35 @@ class UserEditor extends React.Component{
         }
 
 
+        console.log(JSON.stringify({
+            name:name.value,
+            age:age.value,
+            gender:gender.value
+        }));
 
-        fetch(apiUrl,{
-            method:method,
+        // fetch(apiUrl,{
+        //     method:method,
+        //     body:JSON.stringify({
+        //         name:name.value,
+        //         age:age.value,
+        //         gender:gender.value
+        //     }),
+        //     headers:{
+        //         'Content-Type':'application/json',
+        //         'Accept': 'application/json',
+        //         'Access-Token': sessionStorage.getItem('access_token') || '' // 从sessionStorage中获取access token
+        //     }
+        // })
+        request(method,apiUrl,{
             body:JSON.stringify({
                 name:name.value,
                 age:age.value,
                 gender:gender.value
             }),
-            headers:{
-                'Content-Type':'application/json'
-            }
         })
-            .then((res)=>res.json())
+            //.then((res)=>res.json())
             .then((res)=>{
-                // console.log(res);
+                 console.log(res);
                 if(res.id){
                     alert(editType+'用户成功');
                     this.context.router.push('/user/userList');
@@ -53,7 +69,7 @@ class UserEditor extends React.Component{
                     alert(editType+'失败');
                 }
             })
-            .catch((err)=>console.error(err));
+            .catch((err)=>console.error(err+"error"));
     }
 
     render(){

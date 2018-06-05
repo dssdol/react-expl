@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
 import PropTypes from 'prop-types';
+import request ,{get,del}from '../utils/request';
 
 class BookList extends React.Component{
     constructor(props){
@@ -11,7 +12,7 @@ class BookList extends React.Component{
     }
 
     componentWillMount(){
-        fetch('http://localhost:3000/book')
+        get('http://localhost:3000/book')
             .then(res=>res.json())
             .then(res=>{
                 this.setState({
@@ -22,8 +23,7 @@ class BookList extends React.Component{
     handleDele(book){
         const confirm=window.confirm(`确定删除 ${book.name} 吗?`)
         if(confirm){
-            fetch('http://localhost:3000/book/'+book.id,{
-                method:'delete'
+            del('http://localhost:3000/book/'+book.id,{
             })
                 .then(res=>res.json())
                 .then(res=>{

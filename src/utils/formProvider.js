@@ -40,7 +40,7 @@ import React from 'react';
               }
               render(){
                   const{form}=this.state;
-                  console.log(form,"123");
+                 // console.log(form,"123");
                   return <Comp
                       {...this.props}
                       form={form}

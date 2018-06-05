@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeLayout from '../layouts/HomeLayout';
 import PropTypes from 'prop-types';
+import {get,del,post} from '../utils/request';
 
  class UserList extends React.Component{
 
@@ -13,11 +14,12 @@ import PropTypes from 'prop-types';
 
      componentWillMount(){
          fetch('http://localhost:3000/user')
-             .then(res=>res.json())
+            // .then(res=>res.json())
              .then(res=>{
-                 this.setState({
-                     userList:res
-                 });
+                 console.log(res+"aaa");
+                 // this.setState({
+                 //     userList:res
+                 // });
              });
      }
 
@@ -28,10 +30,9 @@ import PropTypes from 'prop-types';
      handleDel(user){
          const confirm=window.confirm(`确定要删除用户 ${user.name} 吗?`);
          if(confirm){
-             fetch('http://localhost:3000/user/' + user.id ,{
-                 method:'delete'
+             del('http://localhost:3000/user/' + user.id ,{
              })
-                 .then(res=>res.json())
+                // .then(res=>res.json())
                  .then(res=>{
                      this.setState({
                          userList: this.state.userList.filter(item => item.id !== user.id)
