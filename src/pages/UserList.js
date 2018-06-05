@@ -13,13 +13,13 @@ import {get,del,post} from '../utils/request';
      }
 
      componentWillMount(){
-         fetch('http://localhost:3000/user')
-            // .then(res=>res.json())
+         fetch('https://easy-mock.com/mock/5b166106ab0e672adb6b95b6/root/getuserlist')
+            .then(res=>res.json())
              .then(res=>{
                  console.log(res+"aaa");
-                 // this.setState({
-                 //     userList:res
-                 // });
+                 this.setState({
+                     userList:res.user
+                 });
              });
      }
 
